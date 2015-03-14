@@ -1,0 +1,30 @@
+{
+    "name": "artkost/yii2-attachment-fileapi",
+    "description": "Yii 2 attachment FileAPI support",
+    "keywords": ["yii2", "attachment", "fileapi", "widgets"],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/artkost/yii2-attachment-fileapi/issues",
+        "source": "https://github.com/artkost/yii2-attachment-fileapi"
+    },
+    "authors": [
+        {
+            "name": "Nikolay Kostyurin",
+            "email": "nikolay@artkost.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0",
+        "artkost/yii2-attachment": "*",
+        "rubaxa/fileapi": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "artkost\\attachment\\fileapi\\": ""
+        }
+    },
+    "extra": {
+        "bootstrap": "artkost\\attachment\\fileapi\\Bootstrap"
+    }
+}

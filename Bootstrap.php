@@ -1,6 +1,6 @@
 <?php
 
-namespace artkost\attachmentfileapi;
+namespace artkost\attachment\fileapi;
 
 use yii\base\BootstrapInterface;
 

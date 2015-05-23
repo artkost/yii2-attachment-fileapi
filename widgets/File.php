@@ -1,19 +1,19 @@
 <?php
 
-namespace artkost\attachment\fileapi\widgets;
+namespace artkost\attachmentFileAPI\widgets;
 
 use artkost\attachment\behaviors\AttachBehavior;
-use artkost\attachment\fileapi\assets\FileAsset;
-use artkost\attachment\fileapi\Asset;
-use artkost\attachment\models\AttachmentFile;
 use artkost\attachment\Manager;
+use artkost\attachment\models\AttachmentFile;
+use artkost\attachmentFileAPI\Asset;
+use artkost\attachmentFileAPI\assets\FileAsset;
+use artkost\attachmentFileAPI\Widget;
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use artkost\attachment\fileapi\Widget;
-use Yii;
+use yii\helpers\Url;
 
 class File extends Widget
 {
@@ -61,8 +61,6 @@ class File extends Widget
 
         $this->settings = ArrayHelper::merge($this->defaultSettings, $this->settings);
 
-        $this->checkBehavior();
-
         $this->checkMultiple();
 
         $this->setupCsrf();
@@ -87,7 +85,7 @@ class File extends Widget
     {
         $request = Yii::$app->getRequest();
 
-        if (!isset($this->settings['url']) ) {
+        if (!isset($this->settings['url'])) {
             $this->settings['url'] = $this->url ? Url::to($this->url) : $request->getUrl();
         } else {
             $this->settings['url'] = Url::to($this->settings['url']);
@@ -108,21 +106,9 @@ class File extends Widget
         }
     }
 
-    public function checkBehavior()
-    {
-        /** @var AttachBehavior $behavior */
-        $behavior = $this->getAttachBehavior();
-        $class = AttachBehavior::className();
-        $name = AttachBehavior::NAME;
-
-        if (!$behavior) {
-            throw new InvalidConfigException("Behavior '{$class}' with name '{$name}' does not exists in model");
-        }
-    }
-
     public function checkMultiple()
     {
-        $config = $this->getModelAttachmentConfig();
+        $config = $this->getAttachmentModelConfig();
 
         if ($config) {
             $this->setMultiple($config['multiple']);
@@ -234,17 +220,17 @@ class File extends Widget
     /**
      * @return array
      */
-    protected function getModelAttachmentConfig()
+    protected function getAttachmentModelConfig()
     {
-        return $this->getAttachBehavior()->getAttachConfig($this->attribute);
+        return $this->model->getAttachmentConfig($this->attribute);
     }
 
     /**
      * @return AttachmentFile
      */
-    protected function getModelAttachment()
+    protected function getAttachmentModel()
     {
-        return $this->getAttachBehavior()->getAttach($this->attribute);
+        return Manager::getInstance()->getAttachmentModel(get_class($this->model), $this->attribute);
     }
 
     /**
@@ -253,14 +239,6 @@ class File extends Widget
     protected function getHiddenInputName()
     {
         return $this->hasModel() ? Html::getInputName($this->model, $this->attribute) : $this->name;
-    }
-
-    /**
-     * @return AttachBehavior
-     */
-    protected function getAttachBehavior()
-    {
-        return $this->model->getBehavior(AttachBehavior::NAME);
     }
 
     protected function getHiddenInput()

@@ -1,6 +1,6 @@
 {
     "name": "artkost/yii2-attachment-fileapi",
-    "description": "Yii 2 attachment FileAPI support",
+    "description": "Yii 2 Attachment FileAPI support",
     "keywords": ["yii2", "attachment", "fileapi", "widgets"],
     "type": "yii2-extension",
     "license": "MIT",
@@ -21,10 +21,10 @@
     },
     "autoload": {
         "psr-4": {
-            "artkost\\attachment\\fileapi\\": ""
+            "artkost\\attachmentFileAPI\\": ""
         }
     },
     "extra": {
-        "bootstrap": "artkost\\attachment\\fileapi\\Bootstrap"
+        "bootstrap": "artkost\\attachmentFileAPI\\Bootstrap"
     }
 }

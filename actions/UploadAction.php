@@ -1,18 +1,14 @@
 <?php
 
-namespace artkost\attachment\fileapi\actions;
+namespace artkost\attachmentFileAPI\actions;
 
-use artkost\attachment\behaviors\AttachBehavior;
-use artkost\attachment\models\AttachmentFile;
+use artkost\attachment\Action;
 use artkost\attachment\Manager;
+use artkost\attachment\models\AttachmentFile;
 use Yii;
-use yii\base\Action;
-use yii\base\InvalidConfigException;
 use yii\base\NotSupportedException;
-use yii\db\ActiveRecord;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
-use yii\web\UploadedFile;
 
 /**
  * Class SingleUploadAction
@@ -21,66 +17,27 @@ use yii\web\UploadedFile;
 class UploadAction extends Action
 {
     /**
-     * @var ActiveRecord
-     */
-    public $modelClass;
-
-    /**
-     * @var string
-     */
-    public $attribute;
-
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        if ($this->modelClass === null) {
-            throw new InvalidConfigException('The "modelClass" attribute must be set.');
-        }
-
-        if ($this->attribute === null) {
-            throw new InvalidConfigException('The "attribute" attribute must be set.');
-        }
-    }
-
-    /**
      * @inheritdoc
      */
     public function run()
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+
+        $this->callCheckAccess();
+
         if ($this->getRequest()->isPost) {
-
-            $result = [];
-
-            $modelClass = $this->modelClass;
-            /** @var ActiveRecord $model */
-            $model = new $modelClass;
-            /** @var AttachBehavior $behavior */
-            $behavior = $model->getBehavior(AttachBehavior::NAME);
-            /** @var UploadedFile $file */
             $file = Manager::getUploadedFile();
 
-            if ($behavior && $file) {
-                /**
-                 * @var  AttachmentFile $instance
-                 */
-                $instance = $behavior->getAttach($this->attribute);
+            $attachModel = $this->getAttachmentModel();
 
-                if ($instance) {
-                    $instance
-                        ->setFile($file)
-                        ->setUser($this->getUser());
+            if ($attachModel && $file) {
 
-                    $status = $instance->save();
+                $status = $attachModel->setFile($file)->setUser($this->getUser())->save();
 
-                    $result = $this->formatFile($instance, $status);
-                }
+                $result = $this->formatFile($attachModel, $status);
             } else {
-                throw new NotSupportedException('Upload for this model not supported, ensure you attach behavior');
+                throw new NotSupportedException('File not given or model does not support attachments.');
             }
-
-            Yii::$app->response->format = Response::FORMAT_JSON;
 
             return $result;
         } else {

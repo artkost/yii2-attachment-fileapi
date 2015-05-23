@@ -1,6 +1,6 @@
 <?php
 
-namespace artkost\attachment\fileapi\assets;
+namespace artkost\attachmentFileAPI\assets;
 
 use yii\web\AssetBundle;
 
@@ -12,7 +12,7 @@ class FileAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@artkost/attachment/fileapi/assets';
+    public $sourcePath = '@artkost/attachmentFileAPI/assets';
 
     /**
      * @inheritdoc

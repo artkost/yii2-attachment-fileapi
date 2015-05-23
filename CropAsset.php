@@ -1,6 +1,6 @@
 <?php
 
-namespace artkost\attachment\fileapi;
+namespace artkost\attachmentFileAPI;
 
 use yii\web\AssetBundle;
 

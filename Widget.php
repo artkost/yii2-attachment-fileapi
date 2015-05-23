@@ -1,10 +1,9 @@
 <?php
 
-namespace artkost\attachment\fileapi;
+namespace artkost\attachmentFileAPI;
 
 use Yii;
 use yii\widgets\InputWidget;
-
 
 class Widget extends InputWidget
 {

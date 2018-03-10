@@ -1,6 +1,6 @@
 <?php
 
-namespace artkost\attachmentFileAPI\actions;
+namespace artkost\yii2\attachmentFileAPI\actions;
 
 use artkost\attachment\Action;
 use artkost\attachment\Manager;

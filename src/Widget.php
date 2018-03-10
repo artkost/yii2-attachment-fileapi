@@ -1,6 +1,6 @@
 <?php
 
-namespace artkost\attachmentFileAPI;
+namespace artkost\yii2\attachmentFileAPI;
 
 use Yii;
 use yii\widgets\InputWidget;

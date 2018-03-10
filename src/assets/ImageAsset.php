@@ -1,6 +1,6 @@
 <?php
 
-namespace artkost\attachmentFileAPI\assets;
+namespace artkost\yii2\attachmentFileAPI\assets;
 
 use yii\web\AssetBundle;
 
@@ -13,6 +13,6 @@ class ImageAsset extends AssetBundle
      * @inheritdoc
      */
     public $depends = [
-        'artkost\attachmentFileAPI\assets\FileAsset',
+        'artkost\yii2\attachmentFileAPI\assets\FileAsset',
     ];
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace artkost\attachmentFileAPI\widgets;
+namespace artkost\yii2\attachmentFileAPI\widgets;
 
-use artkost\attachmentFileAPI\assets\ImageAsset;
-use artkost\attachmentFileAPI\CropAsset;
+use artkost\yii2\attachmentFileAPI\assets\ImageAsset;
+use artkost\yii2\attachmentFileAPI\CropAsset;
 use yii\helpers\Json;
 
 class Image extends File

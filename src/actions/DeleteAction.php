@@ -1,6 +1,6 @@
 <?php
 
-namespace artkost\attachmentFileAPI\actions;
+namespace artkost\yii2\attachmentFileAPI\actions;
 
 use yii\base\Action;
 use yii\base\InvalidConfigException;

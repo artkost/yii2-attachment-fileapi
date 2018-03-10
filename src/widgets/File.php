@@ -1,13 +1,13 @@
 <?php
 
-namespace artkost\attachmentFileAPI\widgets;
+namespace artkost\yii2\attachmentFileAPI\widgets;
 
 use artkost\attachment\behaviors\AttachBehavior;
 use artkost\attachment\Manager;
 use artkost\attachment\models\AttachmentFile;
-use artkost\attachmentFileAPI\Asset;
-use artkost\attachmentFileAPI\assets\FileAsset;
-use artkost\attachmentFileAPI\Widget;
+use artkost\yii2\attachmentFileAPI\Asset;
+use artkost\yii2\attachmentFileAPI\assets\FileAsset;
+use artkost\yii2\attachmentFileAPI\Widget;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
